@@ -5,9 +5,9 @@ import Login from "./pages/Login";
 import Register from "./pages/Register";
 import DetailsInput from "./pages/DetailsInput";
 import Recommendation from "./pages/Recommendation";
+import Navbar from "./components/Navbar.jsx";
 import "./App.css";
 import "./index.css";
-import Navbar from "./components/Navbar";
 const App = () => {
   return (
     <Router>

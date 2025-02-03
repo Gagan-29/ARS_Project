@@ -8,6 +8,7 @@ import Recommendation from "./pages/Recommendation";
 import Navbar from "./components/Navbar.jsx";
 import "./App.css";
 import "./index.css";
+import Footer from "./components/Footer.jsx";
 const App = () => {
   return (
     <Router>
@@ -19,6 +20,7 @@ const App = () => {
         <Route path="/details" element={<DetailsInput />} />
         <Route path="/recommendation" element={<Recommendation />} />
       </Routes>
+      <Footer />
     </Router>
   );
 };

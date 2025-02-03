@@ -9,6 +9,10 @@ import Navbar from "./components/Navbar.jsx";
 import "./App.css";
 import "./index.css";
 import Footer from "./components/Footer.jsx";
+import About from "./pages/About.jsx";
+import Services from "./pages/Services.jsx";
+import Contact from "./pages/Contact.jsx";
+import PrivacyPolicy from "./pages/PrivacyPolicy.jsx";
 const App = () => {
   return (
     <Router>
@@ -19,6 +23,10 @@ const App = () => {
         <Route path="/register" element={<Register />} />
         <Route path="/details" element={<DetailsInput />} />
         <Route path="/recommendation" element={<Recommendation />} />
+        <Route path="/about" element={<About />} />
+        <Route path="/services" element={<Services />} />
+        <Route path="/contact" element={<Contact />} />
+        <Route path="/privacy-policy" element={<PrivacyPolicy />} />
       </Routes>
       <Footer />
     </Router>

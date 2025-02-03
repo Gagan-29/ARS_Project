@@ -15,7 +15,7 @@ const Navbar = () => {
           <li>
             <Link
               to="/"
-              className="text-gray-300 hover:text-white transition-all duration-300 relative group"
+              className="text-green-400 hover:text-white transition-all duration-300 relative group"
             >
               Home
               <span className="absolute left-0 bottom-0 h-0.5 bg-gradient-to-r from-green-400 to-blue-500 w-0 group-hover:w-full transition-all duration-300"></span>
@@ -24,7 +24,7 @@ const Navbar = () => {
           <li>
             <Link
               to="/login"
-              className="text-gray-300 hover:text-white transition-all duration-300 relative group"
+              className="text-blue-400 hover:text-white transition-all duration-300 relative group"
             >
               Login
               <span className="absolute left-0 bottom-0 h-0.5 bg-gradient-to-r from-green-400 to-blue-500 w-0 group-hover:w-full transition-all duration-300"></span>
@@ -33,7 +33,7 @@ const Navbar = () => {
           <li>
             <Link
               to="/register"
-              className="text-gray-300 hover:text-white transition-all duration-300 relative group"
+              className="text-purple-400 hover:text-white transition-all duration-300 relative group"
             >
               Register
               <span className="absolute left-0 bottom-0 h-0.5 bg-gradient-to-r from-green-400 to-blue-500 w-0 group-hover:w-full transition-all duration-300"></span>
@@ -42,7 +42,7 @@ const Navbar = () => {
           <li>
             <Link
               to="/details"
-              className="text-gray-300 hover:text-white transition-all duration-300 relative group"
+              className="text-pink-400 hover:text-white transition-all duration-300 relative group"
             >
               Enter Details
               <span className="absolute left-0 bottom-0 h-0.5 bg-gradient-to-r from-green-400 to-blue-500 w-0 group-hover:w-full transition-all duration-300"></span>
@@ -51,7 +51,7 @@ const Navbar = () => {
           <li>
             <Link
               to="/recommendation"
-              className="text-gray-300 hover:text-white transition-all duration-300 relative group"
+              className="text-yellow-400 hover:text-white transition-all duration-300 relative group"
             >
               Recommendations
               <span className="absolute left-0 bottom-0 h-0.5 bg-gradient-to-r from-green-400 to-blue-500 w-0 group-hover:w-full transition-all duration-300"></span>

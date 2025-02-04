@@ -1,194 +1,128 @@
-import React, { useState } from "react";
+import React, { useState, useRef } from "react";
+import {
+  Upload,
+  FileText,
+  FileCheck,
+  Edit3,
+  Send,
+  Paperclip,
+} from "lucide-react";
 
 const DetailsInput = () => {
-  const [formData, setFormData] = useState({
-    name: "",
-    gpa: "",
-    class10: "",
-    class12: "",
-    gender: "",
-  });
+  const MAX_FILE_SIZE = 2 * 1024 * 1024; // 2MB
 
-  const [errors, setErrors] = useState({
-    name: "",
-    gpa: "",
-    class10: "",
-    class12: "",
-    gender: "",
-  });
+  const [resumeFile, setResumeFile] = useState(null);
+  const [highSchoolFile, setHighSchoolFile] = useState(null);
+  const [undergradFile, setUndergradFile] = useState(null);
+  const resumeRef = useRef(null);
+  const highSchoolRef = useRef(null);
+  const undergradRef = useRef(null);
 
-  const handleChange = (e) => {
-    setFormData({ ...formData, [e.target.name]: e.target.value });
-  };
-
-  const validateForm = () => {
-    let formErrors = {};
-    if (!formData.name) formErrors.name = "Name is required";
-    if (
-      !formData.gpa ||
-      isNaN(formData.gpa) ||
-      formData.gpa < 0 ||
-      formData.gpa > 10
-    )
-      formErrors.gpa = "GPA should be between 0 and 10";
-    if (
-      !formData.class10 ||
-      isNaN(formData.class10) ||
-      formData.class10 < 0 ||
-      formData.class10 > 100
-    )
-      formErrors.class10 = "Class 10 percentage should be between 0 and 100";
-    if (
-      !formData.class12 ||
-      isNaN(formData.class12) ||
-      formData.class12 < 0 ||
-      formData.class12 > 100
-    )
-      formErrors.class12 = "Class 12 percentage should be between 0 and 100";
-    if (!formData.gender) formErrors.gender = "Gender is required";
-    setErrors(formErrors);
-    return Object.keys(formErrors).length === 0;
-  };
-
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    if (validateForm()) {
-      console.log("Form Submitted", formData);
+  const handleFileUpload = (setter, ref) => {
+    const file = ref.current.files[0];
+    if (file) {
+      if (file.size <= MAX_FILE_SIZE) {
+        setter(file);
+      } else {
+        alert(`File size must be max ${MAX_FILE_SIZE / (1024 * 1024)}MB`);
+      }
     }
   };
 
+  const renderFileUploader = (ref, file, setter, label) => (
+    <div className="relative w-full">
+      <input
+        type="file"
+        ref={ref}
+        onChange={() => handleFileUpload(setter, ref)}
+        accept=".pdf,.doc,.docx"
+        className="hidden"
+      />
+      <button
+        type="button"
+        onClick={() => ref.current.click()}
+        className="w-full flex items-center justify-center p-4 border-2 border-dashed border-purple-300 rounded-xl hover:border-purple-500 transition-all group"
+      >
+        <Paperclip className="mr-2 text-purple-400 group-hover:text-purple-600" />
+        <span className="text-gray-600 group-hover:text-purple-600">
+          {file ? file.name : `Upload ${label}`}
+        </span>
+      </button>
+    </div>
+  );
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    // Add submission logic
+    console.log("Files submitted", {
+      resumeFile,
+      highSchoolFile,
+      undergradFile,
+    });
+  };
+
   return (
-    <div className="flex items-center justify-center min-h-screen bg-gradient-to-br from-blue-50 to-blue-100">
-      <div className="w-full max-w-md p-8 space-y-6 bg-white rounded-xl shadow-2xl ring-4 ring-blue-200/50 transform transition-all hover:scale-[1.02]">
-        <div className="text-center">
-          <h2 className="text-3xl font-extrabold text-blue-900 mb-2">
-            Student Profile
+    <div className="min-h-screen bg-gradient-to-br from-purple-50 via-pink-50 to-indigo-50 flex items-center justify-center p-4">
+      <div className="w-full max-w-md bg-white rounded-2xl shadow-2xl p-8 border border-purple-100/50 transform transition-all hover:scale-[1.02]">
+        <div className="text-center mb-8">
+          <FileText
+            className="mx-auto mb-4 text-purple-500"
+            size={48}
+            strokeWidth={1.5}
+          />
+          <h2 className="text-3xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-purple-600 to-pink-600 mb-2">
+            Your Academic Journey
           </h2>
-          <p className="text-gray-500">Enter your academic details</p>
+          <p className="text-gray-500">
+            Drop your documents and unlock personalized college recommendations
+          </p>
         </div>
 
-        <form onSubmit={handleSubmit} className="space-y-4">
-          <div>
-            <label className="block text-sm font-medium text-gray-700 mb-1">
-              Full Name
-            </label>
-            <input
-              type="text"
-              name="name"
-              value={formData.name}
-              onChange={handleChange}
-              className={`w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 ${
-                errors.name
-                  ? "border-red-500 focus:ring-red-300"
-                  : "border-gray-300 focus:ring-blue-300"
-              }`}
-              placeholder="Enter your full name"
-            />
-            {errors.name && (
-              <p className="text-red-500 text-xs mt-1">{errors.name}</p>
-            )}
-          </div>
+        <form onSubmit={handleSubmit} className="space-y-6">
+          {[
+            {
+              label: "Resume",
+              ref: resumeRef,
+              file: resumeFile,
+              setter: setResumeFile,
+            },
+            {
+              label: "High School Marksheet",
+              ref: highSchoolRef,
+              file: highSchoolFile,
+              setter: setHighSchoolFile,
+            },
+            {
+              label: "Undergraduate Marksheet",
+              ref: undergradRef,
+              file: undergradFile,
+              setter: setUndergradFile,
+            },
+          ].map(({ label, ref, file, setter }) => (
+            <div key={label}>
+              <label className="block text-sm font-medium text-gray-700 mb-2">
+                {label}
+              </label>
+              {renderFileUploader(ref, file, setter, label)}
+            </div>
+          ))}
 
-          <div>
-            <label className="block text-sm font-medium text-gray-700 mb-1">
-              GPA
-            </label>
-            <input
-              type="number"
-              name="gpa"
-              value={formData.gpa}
-              onChange={handleChange}
-              className={`w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 ${
-                errors.gpa
-                  ? "border-red-500 focus:ring-red-300"
-                  : "border-gray-300 focus:ring-blue-300"
-              }`}
-              step="0.1"
-              min="0"
-              max="10"
-              placeholder="0.0 - 10.0"
-            />
-            {errors.gpa && (
-              <p className="text-red-500 text-xs mt-1">{errors.gpa}</p>
-            )}
-          </div>
-
-          <div>
-            <label className="block text-sm font-medium text-gray-700 mb-1">
-              Class 10 Percentage
-            </label>
-            <input
-              type="number"
-              name="class10"
-              value={formData.class10}
-              onChange={handleChange}
-              className={`w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 ${
-                errors.class10
-                  ? "border-red-500 focus:ring-red-300"
-                  : "border-gray-300 focus:ring-blue-300"
-              }`}
-              min="0"
-              max="100"
-              placeholder="0 - 100"
-            />
-            {errors.class10 && (
-              <p className="text-red-500 text-xs mt-1">{errors.class10}</p>
-            )}
-          </div>
-
-          <div>
-            <label className="block text-sm font-medium text-gray-700 mb-1">
-              Class 12 Percentage
-            </label>
-            <input
-              type="number"
-              name="class12"
-              value={formData.class12}
-              onChange={handleChange}
-              className={`w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 ${
-                errors.class12
-                  ? "border-red-500 focus:ring-red-300"
-                  : "border-gray-300 focus:ring-blue-300"
-              }`}
-              min="0"
-              max="100"
-              placeholder="0 - 100"
-            />
-            {errors.class12 && (
-              <p className="text-red-500 text-xs mt-1">{errors.class12}</p>
-            )}
-          </div>
-
-          <div>
-            <label className="block text-sm font-medium text-gray-700 mb-1">
-              Gender
-            </label>
-            <select
-              name="gender"
-              value={formData.gender}
-              onChange={handleChange}
-              className={`w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 ${
-                errors.gender
-                  ? "border-red-500 focus:ring-red-300"
-                  : "border-gray-300 focus:ring-blue-300"
-              }`}
+          <div className="flex space-x-4">
+            <button
+              type="button"
+              className="w-1/2 flex items-center justify-center p-3 bg-purple-100 text-purple-700 rounded-xl hover:bg-purple-200 transition-colors"
             >
-              <option value="">Select Gender</option>
-              <option value="male">Male</option>
-              <option value="female">Female</option>
-              <option value="other">Other</option>
-            </select>
-            {errors.gender && (
-              <p className="text-red-500 text-xs mt-1">{errors.gender}</p>
-            )}
+              <Edit3 className="mr-2" size={20} />
+              Edit
+            </button>
+            <button
+              type="submit"
+              className="w-1/2 flex items-center justify-center p-3 bg-gradient-to-r from-purple-600 to-pink-500 text-white rounded-xl hover:opacity-90 transition-colors"
+            >
+              <Send className="mr-2" size={20} />
+              Submit
+            </button>
           </div>
-
-          <button
-            type="submit"
-            className="w-full py-3 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors duration-300 ease-in-out transform hover:scale-[1.02] focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50"
-          >
-            Submit Details
-          </button>
         </form>
       </div>
     </div>

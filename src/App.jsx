@@ -13,6 +13,8 @@ import About from "./pages/About.jsx";
 import Services from "./pages/Services.jsx";
 import Contact from "./pages/Contact.jsx";
 import PrivacyPolicy from "./pages/PrivacyPolicy.jsx";
+import Review from "./pages/Review.jsx";
+import ShareExperiencePage from "./pages/ShareExperiencePage.jsx";
 const App = () => {
   return (
     <Router>
@@ -27,6 +29,8 @@ const App = () => {
         <Route path="/services" element={<Services />} />
         <Route path="/contact" element={<Contact />} />
         <Route path="/privacy-policy" element={<PrivacyPolicy />} />
+        <Route path="/reviews" element={<Review />} />
+        <Route path="/share-experience" element={<ShareExperiencePage />} />
       </Routes>
       <Footer />
     </Router>

@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
+import { MessageCircle, Star, BookOpen, Users } from "lucide-react";
 
 const Home = () => {
   const textVariants = [
@@ -63,7 +64,7 @@ const Home = () => {
   }, [isDeleting, currentTextIndex]);
 
   return (
-    <div className="relative min-h-screen bg-gradient-to-br mt-10 from-blue-50 to-indigo-100 overflow-hidden">
+    <div className="relative min-h-screen bg-gradient-to-br pt-10 pb-10 from-blue-50 to-indigo-100 overflow-hidden">
       <div className="absolute inset-0 pointer-events-none">
         <div className="absolute top-0 right-0 w-96 h-96 bg-blue-300 rounded-full opacity-20 blur-3xl"></div>
         <div className="absolute bottom-0 left-0 w-80 h-80 bg-purple-300 rounded-full opacity-20 blur-3xl"></div>
@@ -82,7 +83,7 @@ const Home = () => {
             towards your academic dreams.
           </p>
 
-          <div className="flex space-x-6 justify-center">
+          <div className="flex space-x-6 justify-center mb-8">
             <Link to="/login" className="w-full max-w-xs">
               <button className="w-full bg-blue-600 text-white py-4 rounded-xl hover:bg-blue-700 transition-all duration-300 shadow-lg hover:shadow-xl transform hover:scale-105 focus:outline-none">
                 Login
@@ -93,6 +94,39 @@ const Home = () => {
                 Register
               </button>
             </Link>
+          </div>
+
+          {/* New Reviews Section */}
+          <div className="mt-8 bg-white/80 rounded-xl p-6 transform transition-all hover:scale-[1.01]">
+            <div className="flex items-center justify-between mb-4">
+              <div className="flex items-center space-x-2">
+                <MessageCircle className="w-6 h-6 text-blue-600" />
+                <h3 className="text-xl font-semibold text-gray-800">
+                  University Insights
+                </h3>
+              </div>
+              <Link
+                to="/reviews"
+                className="flex items-center space-x-2 bg-gradient-to-r from-blue-500 to-purple-500 text-white px-6 py-2 rounded-lg hover:from-blue-600 hover:to-purple-600 transition-all duration-300 shadow-md hover:shadow-lg transform hover:scale-105 focus:outline-none"
+              >
+                <span>Share Your Journey</span>
+                <Star className="w-4 h-4" />
+              </Link>
+            </div>
+            <div className="space-y-3 text-gray-600">
+              <div className="flex items-center space-x-2">
+                <BookOpen className="w-5 h-5 text-purple-500" />
+                <p>Share your admission experience and help future students</p>
+              </div>
+              <div className="flex items-center space-x-2">
+                <Users className="w-5 h-5 text-purple-500" />
+                <p>Connect with current students and alumni</p>
+              </div>
+            </div>
+            <div className="mt-4 text-sm text-gray-500">
+              Help others by sharing your academic scores, admission timeline,
+              and university experience
+            </div>
           </div>
         </div>
 

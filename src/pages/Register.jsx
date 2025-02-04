@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { User, Mail, Phone, Lock, UserPlus } from 'lucide-react';
+import { User, Mail, Phone, Lock, UserPlus } from "lucide-react";
 
 const Register = () => {
   const [formData, setFormData] = useState({
@@ -29,7 +29,8 @@ const Register = () => {
       validationErrors.email = "Please enter a valid email address";
     }
     if (!formData.phoneNumber || !phonePattern.test(formData.phoneNumber)) {
-      validationErrors.phoneNumber = "Please enter a valid 10-digit phone number";
+      validationErrors.phoneNumber =
+        "Please enter a valid 10-digit phone number";
     }
 
     return validationErrors;
@@ -65,7 +66,7 @@ const Register = () => {
               onChange={handleChange}
               placeholder="Username"
               className={`w-full p-3 pl-10 border rounded-lg focus:outline-none focus:ring-2 ${
-                errors.username ? 'border-red-500' : 'border-gray-300'
+                errors.username ? "border-red-500" : "border-gray-300"
               }`}
             />
             {errors.username && (
@@ -84,7 +85,7 @@ const Register = () => {
               onChange={handleChange}
               placeholder="Email"
               className={`w-full p-3 pl-10 border rounded-lg focus:outline-none focus:ring-2 ${
-                errors.email ? 'border-red-500' : 'border-gray-300'
+                errors.email ? "border-red-500" : "border-gray-300"
               }`}
             />
             {errors.email && (
@@ -103,7 +104,7 @@ const Register = () => {
               onChange={handleChange}
               placeholder="Phone Number"
               className={`w-full p-3 pl-10 border rounded-lg focus:outline-none focus:ring-2 ${
-                errors.phoneNumber ? 'border-red-500' : 'border-gray-300'
+                errors.phoneNumber ? "border-red-500" : "border-gray-300"
               }`}
             />
             {errors.phoneNumber && (
@@ -122,7 +123,7 @@ const Register = () => {
               onChange={handleChange}
               placeholder="Password"
               className={`w-full p-3 pl-10 border rounded-lg focus:outline-none focus:ring-2 ${
-                errors.password ? 'border-red-500' : 'border-gray-300'
+                errors.password ? "border-red-500" : "border-gray-300"
               }`}
             />
             {errors.password && (
@@ -141,11 +142,13 @@ const Register = () => {
               onChange={handleChange}
               placeholder="Confirm Password"
               className={`w-full p-3 pl-10 border rounded-lg focus:outline-none focus:ring-2 ${
-                errors.confirmPassword ? 'border-red-500' : 'border-gray-300'
+                errors.confirmPassword ? "border-red-500" : "border-gray-300"
               }`}
             />
             {errors.confirmPassword && (
-              <p className="text-red-500 text-sm mt-1">{errors.confirmPassword}</p>
+              <p className="text-red-500 text-sm mt-1">
+                {errors.confirmPassword}
+              </p>
             )}
           </div>
 
@@ -159,8 +162,10 @@ const Register = () => {
 
         <div className="text-center mt-6">
           <p className="text-gray-600">
-            Already have an account? 
-            <a href="#" className="text-black ml-1 hover:underline">Login</a>
+            Already have an account?
+            <a href="/login" className="text-black ml-1 hover:underline">
+              Login
+            </a>
           </p>
         </div>
       </div>

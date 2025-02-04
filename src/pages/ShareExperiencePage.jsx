@@ -1,5 +1,12 @@
 import React, { useState } from "react";
-import { ArrowLeft } from "lucide-react";
+import {
+  ArrowLeft,
+  Send,
+  User,
+  BookOpen,
+  Calendar,
+  TrendingUp,
+} from "lucide-react";
 import { useNavigate } from "react-router-dom";
 
 const ShareExperiencePage = () => {
@@ -19,9 +26,7 @@ const ShareExperiencePage = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    // Handle form submission logic here
     console.log("Form submitted:", formData);
-    // Navigate back to reviews page after submission
     navigate("/reviews");
   };
 
@@ -34,39 +39,42 @@ const ShareExperiencePage = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-100 py-12 px-4 sm:px-6 lg:px-8">
-      <div className="max-w-3xl mx-auto">
+    <div className="min-h-screen bg-gradient-to-br from-cyan-50 to-indigo-100 py-16 px-4 sm:px-6 lg:px-8">
+      <div className="max-w-4xl mx-auto">
         {/* Header */}
-        <div className="mb-8">
+        <div className="mb-12">
           <button
             onClick={() => navigate("/reviews")}
-            className="flex items-center text-gray-600 hover:text-gray-800 transition-colors duration-300"
+            className="flex items-center text-gray-600 hover:text-indigo-600 transition-colors duration-300 mb-4"
           >
             <ArrowLeft className="w-5 h-5 mr-2" />
             Back to Reviews
           </button>
-          <h1 className="text-3xl font-bold text-gray-800 mt-6 mb-2">
-            Share Your University Experience
+          <h1 className="text-5xl font-extrabold text-transparent pb-5 bg-clip-text bg-gradient-to-r from-cyan-600 to-indigo-600 mb-4">
+            Share Your Academic Journey
           </h1>
-          <p className="text-gray-600">
-            Help future students by sharing your academic journey and admission
-            experience
+          <p className="text-xl text-gray-600 max-w-2xl text-center mx-auto">
+            Empower future students by sharing your authentic university
+            experience and insights
           </p>
         </div>
 
         {/* Form */}
         <form
           onSubmit={handleSubmit}
-          className="bg-white rounded-xl shadow-lg p-6 space-y-6"
+          className="bg-white/80 backdrop-blur-md rounded-3xl shadow-2xl p-10 space-y-8"
         >
           {/* Personal Information */}
-          <div className="space-y-4">
-            <h2 className="text-xl font-semibold text-gray-800">
-              Personal Information
-            </h2>
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+          <div className="space-y-6">
+            <div className="flex items-center space-x-3 mb-4">
+              <User className="w-7 h-7 text-cyan-600" />
+              <h2 className="text-2xl font-semibold text-gray-800">
+                Personal Details
+              </h2>
+            </div>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
               <div>
-                <label className="block text-sm font-medium text-gray-700 mb-1">
+                <label className="block text-sm font-medium text-gray-700 mb-2">
                   Full Name
                 </label>
                 <input
@@ -74,12 +82,12 @@ const ShareExperiencePage = () => {
                   name="name"
                   value={formData.name}
                   onChange={handleChange}
-                  className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                  className="w-full px-4 py-3 border-2 border-cyan-100 rounded-xl focus:ring-2 focus:ring-cyan-500"
                   required
                 />
               </div>
               <div>
-                <label className="block text-sm font-medium text-gray-700 mb-1">
+                <label className="block text-sm font-medium text-gray-700 mb-2">
                   Age
                 </label>
                 <input
@@ -87,7 +95,7 @@ const ShareExperiencePage = () => {
                   name="age"
                   value={formData.age}
                   onChange={handleChange}
-                  className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                  className="w-full px-4 py-3 border-2 border-cyan-100 rounded-xl focus:ring-2 focus:ring-cyan-500"
                   required
                 />
               </div>
@@ -95,13 +103,16 @@ const ShareExperiencePage = () => {
           </div>
 
           {/* Academic Information */}
-          <div className="space-y-4">
-            <h2 className="text-xl font-semibold text-gray-800">
-              Academic Information
-            </h2>
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+          <div className="space-y-6">
+            <div className="flex items-center space-x-3 mb-4">
+              <BookOpen className="w-7 h-7 text-indigo-600" />
+              <h2 className="text-2xl font-semibold text-gray-800">
+                Academic Information
+              </h2>
+            </div>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
               <div>
-                <label className="block text-sm font-medium text-gray-700 mb-1">
+                <label className="block text-sm font-medium text-gray-700 mb-2">
                   University
                 </label>
                 <input
@@ -109,12 +120,12 @@ const ShareExperiencePage = () => {
                   name="university"
                   value={formData.university}
                   onChange={handleChange}
-                  className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                  className="w-full px-4 py-3 border-2 border-cyan-100 rounded-xl focus:ring-2 focus:ring-cyan-500"
                   required
                 />
               </div>
               <div>
-                <label className="block text-sm font-medium text-gray-700 mb-1">
+                <label className="block text-sm font-medium text-gray-700 mb-2">
                   Course
                 </label>
                 <input
@@ -122,12 +133,12 @@ const ShareExperiencePage = () => {
                   name="course"
                   value={formData.course}
                   onChange={handleChange}
-                  className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                  className="w-full px-4 py-3 border-2 border-cyan-100 rounded-xl focus:ring-2 focus:ring-cyan-500"
                   required
                 />
               </div>
               <div>
-                <label className="block text-sm font-medium text-gray-700 mb-1">
+                <label className="block text-sm font-medium text-gray-700 mb-2">
                   Graduation Year
                 </label>
                 <input
@@ -135,12 +146,12 @@ const ShareExperiencePage = () => {
                   name="graduationYear"
                   value={formData.graduationYear}
                   onChange={handleChange}
-                  className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                  className="w-full px-4 py-3 border-2 border-cyan-100 rounded-xl focus:ring-2 focus:ring-cyan-500"
                   required
                 />
               </div>
               <div>
-                <label className="block text-sm font-medium text-gray-700 mb-1">
+                <label className="block text-sm font-medium text-gray-700 mb-2">
                   Course Duration
                 </label>
                 <input
@@ -148,7 +159,7 @@ const ShareExperiencePage = () => {
                   name="duration"
                   value={formData.duration}
                   onChange={handleChange}
-                  className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                  className="w-full px-4 py-3 border-2 border-cyan-100 rounded-xl focus:ring-2 focus:ring-cyan-500"
                   required
                 />
               </div>
@@ -156,13 +167,16 @@ const ShareExperiencePage = () => {
           </div>
 
           {/* Academic Scores */}
-          <div className="space-y-4">
-            <h2 className="text-xl font-semibold text-gray-800">
-              Academic Scores
-            </h2>
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+          <div className="space-y-6">
+            <div className="flex items-center space-x-3 mb-4">
+              <TrendingUp className="w-7 h-7 text-cyan-600" />
+              <h2 className="text-2xl font-semibold text-gray-800">
+                Academic Scores
+              </h2>
+            </div>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
               <div>
-                <label className="block text-sm font-medium text-gray-700 mb-1">
+                <label className="block text-sm font-medium text-gray-700 mb-2">
                   High School Marks (%)
                 </label>
                 <input
@@ -170,12 +184,12 @@ const ShareExperiencePage = () => {
                   name="highSchoolMarks"
                   value={formData.highSchoolMarks}
                   onChange={handleChange}
-                  className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                  className="w-full px-4 py-3 border-2 border-cyan-100 rounded-xl focus:ring-2 focus:ring-cyan-500"
                   required
                 />
               </div>
               <div>
-                <label className="block text-sm font-medium text-gray-700 mb-1">
+                <label className="block text-sm font-medium text-gray-700 mb-2">
                   Undergraduate Marks (%)
                 </label>
                 <input
@@ -183,7 +197,7 @@ const ShareExperiencePage = () => {
                   name="undergraduateMarks"
                   value={formData.undergraduateMarks}
                   onChange={handleChange}
-                  className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                  className="w-full px-4 py-3 border-2 border-cyan-100 rounded-xl focus:ring-2 focus:ring-cyan-500"
                   required
                 />
               </div>
@@ -191,16 +205,16 @@ const ShareExperiencePage = () => {
           </div>
 
           {/* Status and Review */}
-          <div className="space-y-4">
+          <div className="space-y-6">
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-1">
+              <label className="block text-sm font-medium text-gray-700 mb-2">
                 Status
               </label>
               <select
                 name="status"
                 value={formData.status}
                 onChange={handleChange}
-                className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                className="w-full px-4 py-3 border-2 border-cyan-100 rounded-xl focus:ring-2 focus:ring-cyan-500"
                 required
               >
                 <option value="Current Student">Current Student</option>
@@ -208,17 +222,17 @@ const ShareExperiencePage = () => {
               </select>
             </div>
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-1">
+              <label className="block text-sm font-medium text-gray-700 mb-2">
                 Your Experience
               </label>
               <textarea
                 name="review"
                 value={formData.review}
                 onChange={handleChange}
-                rows="4"
-                className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                rows="5"
+                className="w-full px-4 py-3 border-2 border-cyan-100 rounded-xl focus:ring-2 focus:ring-cyan-500"
                 required
-                placeholder="Share your experience about the admission process, university life, and any tips for future students..."
+                placeholder="Share your detailed experience about the admission process, university life, and valuable tips for future students..."
               ></textarea>
             </div>
           </div>
@@ -227,9 +241,10 @@ const ShareExperiencePage = () => {
           <div className="flex justify-end">
             <button
               type="submit"
-              className="bg-gradient-to-r from-blue-600 to-purple-600 text-white px-8 py-3 rounded-xl hover:from-blue-700 hover:to-purple-700 transition-all duration-300 shadow-lg hover:shadow-xl transform hover:scale-105 focus:outline-none"
+              className="flex items-center space-x-3 bg-gradient-to-r from-cyan-600 to-indigo-600 text-white px-10 py-4 rounded-xl hover:from-cyan-700 hover:to-indigo-700 transition-all duration-300 shadow-xl hover:shadow-2xl transform hover:scale-105"
             >
-              Submit Review
+              <Send className="w-5 h-5" />
+              <span>Submit Experience</span>
             </button>
           </div>
         </form>

@@ -1,15 +1,13 @@
-import React, { useState } from "react";
+import React, { useState, useMemo } from "react";
 import { Link } from "react-router-dom";
 import {
   Star,
   Search,
-  GraduationCap,
-  Calendar,
-  Clock,
-  Book,
-  School,
-  User,
+  Filter,
   PenTool,
+  BookOpen,
+  Globe,
+  Award,
 } from "lucide-react";
 
 const Review = () => {
@@ -28,6 +26,7 @@ const Review = () => {
         "The program was intensive but rewarding. The faculty is excellent and the research opportunities are abundant. I particularly enjoyed the AI and Machine Learning modules.",
       status: "Alumni",
       rating: 5,
+      country: "UK",
     },
     {
       id: 2,
@@ -43,152 +42,145 @@ const Review = () => {
         "Currently in my final semester. The practical exposure and industry connections are outstanding. The German language support for international students is very helpful.",
       status: "Current Student",
       rating: 4,
+      country: "Germany",
     },
   ]);
 
   const [searchTerm, setSearchTerm] = useState("");
   const [selectedUniversity, setSelectedUniversity] = useState("all");
 
+  const filteredReviews = useMemo(() => {
+    return reviewsData.filter(
+      (review) =>
+        (selectedUniversity === "all" ||
+          review.university
+            .toLowerCase()
+            .includes(selectedUniversity.toLowerCase())) &&
+        (searchTerm === "" ||
+          review.university.toLowerCase().includes(searchTerm.toLowerCase()) ||
+          review.course.toLowerCase().includes(searchTerm.toLowerCase()) ||
+          review.review.toLowerCase().includes(searchTerm.toLowerCase()))
+    );
+  }, [searchTerm, selectedUniversity]);
+
   const renderStars = (rating) => {
     return [...Array(5)].map((_, index) => (
       <Star
         key={index}
         className={`w-5 h-5 ${
-          index < rating ? "text-yellow-400 fill-yellow-400" : "text-gray-300"
+          index < rating ? "text-amber-400 fill-amber-400" : "text-gray-300"
         }`}
       />
     ));
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-100 py-12 px-4 sm:px-6 lg:px-8">
+    <div className="min-h-screen bg-gradient-to-br from-cyan-50 to-indigo-100 py-16 px-4 sm:px-6 lg:px-8">
       {/* Header Section */}
-      <div className="max-w-7xl mx-auto mb-12">
-        <h1 className="text-4xl font-bold text-center text-gray-800 mb-4">
-          University Admission Reviews
+      <div className="max-w-4xl mx-auto text-center mb-12">
+        <h1 className="text-5xl font-extrabold text-transparent pb-5 bg-clip-text bg-gradient-to-r from-cyan-600 to-indigo-600 mb-4">
+          University Experience Insights
         </h1>
-        <p className="text-center text-gray-600 max-w-2xl mx-auto">
-          Real experiences shared by students and alumni to help you make
-          informed decisions about your education journey
+        <p className="text-xl text-gray-600 max-w-2xl mx-auto">
+          Authentic student stories to guide your global academic journey
         </p>
       </div>
 
       {/* Search and Filter Section */}
-      <div className="max-w-7xl mx-auto mb-8">
-        <div className="bg-white rounded-xl shadow-md p-6">
+      <div className="max-w-4xl mx-auto mb-12">
+        <div className="bg-white/80 rounded-2xl shadow-xl p-8">
           <div className="flex flex-col md:flex-row gap-4">
-            <div className="flex-1">
-              <div className="relative">
-                <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400" />
-                <input
-                  type="text"
-                  placeholder="Search by university, course, or keyword..."
-                  className="w-full pl-10 pr-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-                  value={searchTerm}
-                  onChange={(e) => setSearchTerm(e.target.value)}
-                />
-              </div>
+            <div className="relative flex-grow">
+              <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400" />
+              <input
+                type="text"
+                placeholder="Search universities, courses, or keywords..."
+                className="w-full pl-10 pr-4 py-3 border-2 border-cyan-100 rounded-xl focus:ring-2 focus:ring-cyan-500 focus:border-transparent"
+                value={searchTerm}
+                onChange={(e) => setSearchTerm(e.target.value)}
+              />
             </div>
-            <div className="w-full md:w-64">
-              <select
-                className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-                value={selectedUniversity}
-                onChange={(e) => setSelectedUniversity(e.target.value)}
-              >
-                <option value="all">All Universities</option>
-                <option value="oxford">University of Oxford</option>
-                <option value="munich">Technical University of Munich</option>
-                <option value="harvard">Harvard University</option>
-              </select>
+            <div className="flex-shrink-0">
+              <div className="relative">
+                <Filter className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400" />
+                <select
+                  className="w-full pl-10 pr-4 py-3 border-2 border-cyan-100 rounded-xl focus:ring-2 focus:ring-cyan-500"
+                  value={selectedUniversity}
+                  onChange={(e) => setSelectedUniversity(e.target.value)}
+                >
+                  <option value="all">All Universities</option>
+                  <option value="oxford">University of Oxford</option>
+                  <option value="munich">Technical University of Munich</option>
+                </select>
+              </div>
             </div>
           </div>
         </div>
       </div>
 
       {/* Reviews Grid */}
-      <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-6">
-        {reviewsData.map((review) => (
+      <div className="max-w-5xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-8">
+        {filteredReviews.map((review) => (
           <div
             key={review.id}
-            className="bg-white rounded-xl shadow-lg p-6 transform transition-all duration-300 hover:scale-[1.02]"
+            className="bg-white/80 rounded-2xl shadow-xl p-6 transform transition-all duration-300 hover:scale-[1.02] hover:shadow-2xl"
           >
             {/* Review Header */}
-            <div className="flex justify-between items-start mb-4">
+            <div className="flex justify-between items-start mb-6">
               <div>
-                <h3 className="text-xl font-semibold text-gray-800">
+                <h3 className="text-2xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-cyan-600 to-indigo-600">
                   {review.university}
                 </h3>
-                <p className="text-gray-600">{review.course}</p>
+                <p className="text-gray-600 flex items-center space-x-2">
+                  <Globe className="w-4 h-4 text-cyan-500" />
+                  <span>{review.course}</span>
+                </p>
               </div>
-              <span className="px-3 py-1 bg-blue-100 text-blue-800 rounded-full text-sm">
+              <span className="px-3 py-1 bg-cyan-100 text-cyan-800 rounded-full text-sm font-medium">
                 {review.status}
               </span>
             </div>
 
-            {/* Student Details Grid */}
-            <div className="grid grid-cols-2 gap-4 mb-4">
+            {/* Review Content */}
+            <div className="mb-6">
+              <p className="text-gray-700 italic">"{review.review}"</p>
+            </div>
+
+            {/* Student Details */}
+            <div className="grid grid-cols-2 gap-4 mb-6 bg-cyan-50/50 p-4 rounded-xl">
               <div className="flex items-center space-x-2">
-                <User className="w-4 h-4 text-gray-400" />
-                <span className="text-gray-600">{review.name}</span>
-              </div>
-              <div className="flex items-center space-x-2">
-                <Calendar className="w-4 h-4 text-gray-400" />
-                <span className="text-gray-600">
-                  Class of {review.graduationYear}
+                <Award className="w-5 h-5 text-indigo-500" />
+                <span className="text-gray-700">
+                  Graduation: {review.graduationYear}
                 </span>
               </div>
               <div className="flex items-center space-x-2">
-                <Clock className="w-4 h-4 text-gray-400" />
-                <span className="text-gray-600">{review.duration}</span>
+                <BookOpen className="w-5 h-5 text-cyan-500" />
+                <span className="text-gray-700">{review.duration}</span>
               </div>
-              <div className="flex items-center space-x-2">
-                <User className="w-4 h-4 text-gray-400" />
-                <span className="text-gray-600">{review.age} years</span>
-              </div>
-            </div>
-
-            {/* Academic Scores */}
-            <div className="bg-gray-50 rounded-lg p-4 mb-4">
-              <h4 className="font-semibold text-gray-700 mb-2">
-                Academic Scores
-              </h4>
-              <div className="grid grid-cols-2 gap-4">
-                <div>
-                  <p className="text-sm text-gray-500">High School</p>
-                  <p className="font-medium text-gray-700">
-                    {review.highSchoolMarks}
-                  </p>
-                </div>
-                <div>
-                  <p className="text-sm text-gray-500">Undergraduate</p>
-                  <p className="font-medium text-gray-700">
-                    {review.undergraduateMarks}
-                  </p>
-                </div>
-              </div>
-            </div>
-
-            {/* Review Content */}
-            <div className="mb-4">
-              <p className="text-gray-600">{review.review}</p>
             </div>
 
             {/* Rating */}
-            <div className="flex items-center space-x-1">
-              {renderStars(review.rating)}
+            <div className="flex justify-between items-center">
+              <div className="flex items-center space-x-1">
+                {renderStars(review.rating)}
+              </div>
+              <span className="text-sm text-gray-500">
+                Academic Score: {review.undergraduateMarks}
+              </span>
             </div>
           </div>
         ))}
       </div>
 
       {/* Add Review Button */}
-      <div className="max-w-7xl mx-auto mt-8 flex justify-center">
+      <div className="max-w-4xl mx-auto mt-12 flex justify-center">
         <Link
           to="/share-experience"
-          className="bg-gradient-to-r from-blue-600 to-purple-600 text-white px-8 py-3 rounded-xl hover:from-blue-700 hover:to-purple-700 transition-all duration-300 shadow-lg hover:shadow-xl transform hover:scale-105 focus:outline-none flex items-center space-x-2"
+          className="flex items-center space-x-3 px-8 py-4 bg-gradient-to-r from-cyan-600 to-indigo-600 text-white rounded-xl hover:from-cyan-700 hover:to-indigo-700 transition-all duration-300 shadow-xl hover:shadow-2xl transform hover:scale-105"
         >
-          <PenTool className="w-5 h-5" />
-          <span>Share Your Experience</span>
+          <PenTool className="w-6 h-6" />
+          <span className="text-lg font-semibold">Share Your Experience</span>
         </Link>
       </div>
     </div>

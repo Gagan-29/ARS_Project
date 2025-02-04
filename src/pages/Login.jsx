@@ -1,18 +1,18 @@
 import React, { useState } from "react";
-import { User, Lock, LogIn } from 'lucide-react';
+import { User, Lock, LogIn } from "lucide-react";
 
 const Login = () => {
-  const [formData, setFormData] = useState({ 
-    username: "", 
+  const [formData, setFormData] = useState({
+    username: "",
     password: "",
-    rememberMe: false 
+    rememberMe: false,
   });
 
   const handleChange = (e) => {
     const { name, value, type, checked } = e.target;
-    setFormData({ 
-      ...formData, 
-      [name]: type === 'checkbox' ? checked : value 
+    setFormData({
+      ...formData,
+      [name]: type === "checkbox" ? checked : value,
     });
   };
 
@@ -71,7 +71,9 @@ const Login = () => {
               />
               <label className="text-gray-600">Remember me</label>
             </div>
-            <a href="#" className="text-black hover:underline">Forgot Password?</a>
+            <a href="#" className="text-black hover:underline">
+              Forgot Password?
+            </a>
           </div>
 
           <button
@@ -84,8 +86,10 @@ const Login = () => {
 
         <div className="text-center mt-6">
           <p className="text-gray-600">
-            Don't have an account? 
-            <a href="#" className="text-black ml-1 hover:underline">Sign Up</a>
+            Don't have an account?
+            <a href="/register" className="text-black ml-1 hover:underline">
+              Sign Up
+            </a>
           </p>
         </div>
       </div>

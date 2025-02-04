@@ -60,14 +60,13 @@ const Footer = () => {
             </h3>
             <div className="space-y-2 text-purple-200">
               <p className="flex items-center">
-                <MapPin className="w-5 h-5 mr-2" /> 1234 Street Name, City,
-                Country
+                <MapPin className="w-5 h-5 mr-2" /> VIT Vellore,Tamil Nadu
               </p>
               <p className="flex items-center">
                 <Mail className="w-5 h-5 mr-2" /> contact@admissionsystem.com
               </p>
               <p className="flex items-center">
-                <Phone className="w-5 h-5 mr-2" /> +1 (555) 123-4567
+                <Phone className="w-5 h-5 mr-2" /> +91 9347838323
               </p>
             </div>
           </div>

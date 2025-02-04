@@ -15,6 +15,8 @@ import Contact from "./pages/Contact.jsx";
 import PrivacyPolicy from "./pages/PrivacyPolicy.jsx";
 import Review from "./pages/Review.jsx";
 import ShareExperiencePage from "./pages/ShareExperiencePage.jsx";
+import Term from "./pages/Term.jsx";
+import CookiePolicy from "./pages/CookiePolicy.jsx";
 const App = () => {
   return (
     <Router>
@@ -31,6 +33,8 @@ const App = () => {
         <Route path="/privacy-policy" element={<PrivacyPolicy />} />
         <Route path="/reviews" element={<Review />} />
         <Route path="/share-experience" element={<ShareExperiencePage />} />
+        <Route path="/terms" element={<Term />} />
+        <Route path="/cookies" element={<CookiePolicy />} />
       </Routes>
       <Footer />
     </Router>
